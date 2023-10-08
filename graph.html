@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sensor Data Visualization</title>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 60px;
+            padding-bottom: 100px; /* Ensuring enough content for the footer to appear at the end */
+        }
+
+        .navbar {
+            background-color: #28a745; /* Green background */
+        }
+
+        .navbar-text {
+            color: yellow; /* Yellow text color */
+        }
+
+        .feature-card {
+            margin: 20px 0;
+        }
+
+        .jumbotron {
+            background-color: #28a745; /* Green background for the heading */
+            color: white;
+            padding: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="index.html">Home</a>
+        <a class="navbar-brand" href="light.html">Smart Lighting</a>
+        <a class="navbar-brand" href="graph.html">Graph</a>
+        <div class="navbar-collapse">
+            <span class="navbar-text">Revolutionizing Illumination with IoT</span>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Smart Lighting Control</h1>
+    <div id="plot"></div>
+
+    <script>
+        // Sample sensor data (time and value pairs)
+        const sensorData = [
+            { time: '2023-10-01 10:00:00', value: 25 },
+            { time: '2023-10-01 11:00:00', value: 28 },
+            { time: '2023-10-01 12:00:00', value: 22 },
+            { time: '2023-10-01 13:00:00', value: 26 },
+            { time: '2023-10-01 14:00:00', value: 30 }
+        ];
+
+        // Extract time and value data for Plotly
+        const time = sensorData.map(data => data.time);
+        const values = sensorData.map(data => data.value);
+
+        // Create a trace for the line chart
+        const trace = {
+            x: time,
+            y: values,
+            type: 'line',
+            mode: 'lines+markers',
+            marker: { size: 10 },
+            line: { shape: 'linear' }
+        };
+
+        // Set layout options for the chart
+        const layout = {
+            title: 'Sensor Data Visualization',
+            xaxis: { title: 'Time' },
+            yaxis: { title: 'Sensor Value' }
+        };
+
+        // Create the plot using Plotly
+        Plotly.newPlot('plot', [trace], layout);
+    </script>
+    <!-- Footer -->
+    <footer class="bg-dark text-light text-center py-3 fixed-bottom">
+        <p>&copy; 2023 IoT Smart Lighting. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

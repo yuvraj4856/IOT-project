@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Smart Lighting Control</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .light-container {
+            margin-bottom: 20px;
+        }
+
+        .light-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <style>
+        body {
+            padding-top: 60px;
+            padding-bottom: 100px; /* Ensuring enough content for the footer to appear at the end */
+        }
+
+        .navbar {
+            background-color: #28a745; /* Green background */
+        }
+
+        .navbar-text {
+            color: yellow; /* Yellow text color */
+        }
+
+        .feature-card {
+            margin: 20px 0;
+        }
+
+        .jumbotron {
+            background-color: #28a745; /* Green background for the heading */
+            color: white;
+            padding: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Smart Lighting Control</h1>
+        <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="index.html">Home</a>
+        <a class="navbar-brand" href="light.html">Smart Lighting</a>
+        <a class="navbar-brand" href="graph.html">Graph</a>
+        <div class="navbar-collapse">
+            <span class="navbar-text">Revolutionizing Illumination with IoT</span>
+        </div>
+    </nav>
+
+        <!-- Add Light Form -->
+        <div class="light-container">
+            <label for="light-name">Light Name:</label>
+            <input type="text" id="light-name">
+            <label for="brightness">Brightness:</label>
+            <input type="range" id="brightness" min="0" max="100" value="50">
+            <label for="color">Color:</label>
+            <input type="color" id="color">
+            <button onclick="addLight()">Add Light</button>
+        </div>
+
+        <!-- Display Lights -->
+        <div id="lights-list"></div>
+
+        <!-- Selected Lights -->
+        <div class="light-container">
+            <h2>Selected Lights</h2>
+            <textarea id="selected-lights" rows="5" cols="30" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        let lights = [];
+
+        function addLight() {
+            const lightName = document.getElementById('light-name').value;
+            const brightness = document.getElementById('brightness').value;
+            const color = document.getElementById('color').value;
+
+            const light = {
+                name: lightName,
+                brightness: brightness,
+                color: color
+            };
+
+            lights.push(light);
+            displayLights();
+            updateSelectedLights();
+        }
+
+        function displayLights() {
+            const lightsList = document.getElementById('lights-list');
+            lightsList.innerHTML = '';
+
+            lights.forEach(light => {
+                const lightBox = document.createElement('div');
+                lightBox.className = 'light-box';
+                lightBox.style.backgroundColor = light.color;
+                lightBox.textContent = `${light.name} - Brightness: ${light.brightness}, Color: ${light.color}`;
+                lightsList.appendChild(lightBox);
+            });
+        }
+
+        function updateSelectedLights() {
+            const selectedLightsTextarea = document.getElementById('selected-lights');
+            selectedLightsTextarea.value = '';
+
+            lights.forEach(light => {
+                selectedLightsTextarea.value += `${light.name} - Brightness: ${light.brightness}, Color: ${light.color}\n`;
+            });
+        }
+    </script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
